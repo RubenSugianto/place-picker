@@ -6,8 +6,9 @@ const Modal = forwardRef(function Modal({ open, children, onClose }) {
 
   /* 
   ini pake use effect karna ada dependencies yang param kedua [open]
-  itu berfungsi dimana param 1 akan dijalankan ketika apa yang kita passing kesitu keubah
-  dalam hal ini, open akan ada false / true, maka akan dijalankan ketika ada perubahan pada state
+  itu berfungsi dimana param 1 (function) akan dijalankan ketika modal di render pertama kali dan
+  apa yang kita passing kesitu berubah, dalam hal ini, open akan ada false / true, 
+  maka akan dijalankan ketika ada perubahan pada state
   */
   useEffect(() => {
     if (open) {
@@ -19,7 +20,7 @@ const Modal = forwardRef(function Modal({ open, children, onClose }) {
 
   return createPortal(
     <dialog className="modal" ref={dialog} onClose={onClose}>
-      {children}
+      {open ? children : null}
     </dialog>,
     document.getElementById('modal')
   );
